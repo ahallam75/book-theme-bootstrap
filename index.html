@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>Book Site Bootstrap Theme</title>
   </head>
-  <body>
+  <body id="home" data-spy="scroll" data-target="#main-nav">
     <!-- START HERE-->
 
     <!-- NAVBAR AND LOGO-->
@@ -473,12 +473,26 @@
             </form>
           </div>
 
-          <div class="col-lg-3 align-self-center">
-            <img src="img/mlogo.png" alt="" class="img-fluid" />
+          <div id="contact-logo" class="col-lg-3 align-self-center">
+            <img src="img/mlogo.png" alt="Logo" class="img-fluid" />
           </div>
         </div>
       </div>
     </section>
+
+    <!-- FOOTER -->
+    <footer id="main-footer" class="py-5 bg-primary text-white">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-6 ml-auto">
+            <p class="lead">
+              Copyright &copy;
+              <span id="year"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script
       src="http://code.jquery.com/jquery-3.4.1.min.js"
@@ -498,6 +512,28 @@
     <script>
       //Get the current year for the copyright
       $("#year").text(new Date().getFullYear());
+
+      // Init Scrollspy
+      $("body").scrollspy({ target: "#main-nav" });
+
+      // Smooth Scrolling
+      $("#main-nav a").on("click", function(event) {
+        if (this.hash !== "") {
+          event.preventDefault();
+
+          const hash = this.hash;
+
+          $("html, body").animate(
+            {
+              scrollTop: $(hash).offset().top
+            },
+            800,
+            function() {
+              window.location.hash = hash;
+            }
+          );
+        }
+      });
     </script>
   </body>
 </html>
